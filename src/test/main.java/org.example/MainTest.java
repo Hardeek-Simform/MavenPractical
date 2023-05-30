@@ -1,7 +1,5 @@
 package main.java.org.example;
 
-import org.junit.internal.runners.statements.Fail;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

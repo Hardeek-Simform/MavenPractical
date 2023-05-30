@@ -65,7 +65,7 @@ public class Main {
                         System.out.print("\nenter Name:");
                         uName = dataReader.nextLine();
                         System.out.print("\nEnter Age:");
-                        age = Integer.parseInt(dataReader.next("^[0-9]{2}$"));
+                        age = Integer.parseInt(dataReader.next("[0-9]{2}$"));
                         System.out.print("\nEnter F for female and M for male:");
                         gender = dataReader.next("[f,F,m,M]");
                         currentClassObj.validateGender(gender, age, uName, users);
@@ -94,7 +94,7 @@ public class Main {
                         System.out.print("\nname:");
                         String uNameForUpdate = dataReader.nextLine();
                         System.out.print("\nage:");
-                        age = Integer.parseInt(dataReader.next("^[0-9]{2}$"));
+                        age = Integer.parseInt(dataReader.next("[0-9]{2}$"));
                         System.out.print("\nGender(enter f or m):");
                         gender = dataReader.next("[f,F,m,M]");
                         currentClassObj.validateGender(gender, age, uName, users);
@@ -108,7 +108,7 @@ public class Main {
                 System.out.println("Process cancelled. Please try again");
             }
 
-        } while (option < 6 || option <= 0);
+        } while (option < 6 && option >= 1);
     }
 
 }
