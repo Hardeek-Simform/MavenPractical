@@ -1,13 +1,14 @@
 package org.example;
 
 
-import org.example.User.classes.User;
+import org.example.entity.User;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
     private void validateGender(String gender, int age, String uName, ArrayList<User> users) {
         if (gender == "F" || gender == "f") {
             users.add(new User(age, uName, "Female"));
@@ -58,57 +59,63 @@ public class Main {
             String gender;
             try {
                 switch (option) {
-
-
                     case 1: // Add
-
-                        System.out.print("\nenter Name:");
+                        System.out.println("\nPlease enter the following details to add:");
+                        System.out.print("Enter Name:");
                         uName = dataReader.nextLine();
-                        System.out.print("\nEnter Age:");
+                        System.out.print("Enter Age:");
                         age = Integer.parseInt(dataReader.next("[0-9]{2}$"));
-                        System.out.print("\nEnter F for female and M for male:");
+                        System.out.print("Enter F for female and M for male:");
                         gender = dataReader.next("[f,F,m,M]");
-                        currentClassObj.validateGender(gender, age, uName, users);
+                        currentClassObj.validateGender(gender, age, uName.trim(), users);
                         break;
 
                     case 2: // Display
-                        users.stream().forEach(System.out::println);
+                        System.out.println("\nHere below are the details that was requested:");
+                        if (users.isEmpty()) {
+                            System.out.println("No records found !!!\n");
+                        } else
+                            users.stream().forEach(System.out::println);
                         break;
 
                     case 3: // Search
-                        System.out.print("enter Name to search:");
+                        System.out.println("\nPlease enter the name to search:");
                         uName = dataReader.nextLine();
-                        users.stream().filter(e -> e.getUserName().toLowerCase().equals(uName.toLowerCase()))
+                        users.stream().filter(e -> e.getUserName().toLowerCase().equals(uName.trim().toLowerCase()))
                                 .forEach(e -> System.out.println(e));
                         break;
 
                     case 4: // Delete
-                        uName = dataReader.nextLine();
-                        users.stream().filter(e -> e.getUserName().toLowerCase().equals(uName.toLowerCase()))
-                                .forEach(e -> users.remove(e));
+                        System.out.println("\nPlease enter the name whose data you want to delete:");
+                        Scanner dataReader1 = new Scanner(System.in);
+                        String DName = dataReader1.nextLine();
+//                        users.stream().filter(e -> DName.trim().toLowerCase().equals(e.getUserName().trim().toLowerCase()))
+//                                .forEach(e -> users.remove(e));
+                        users.removeIf(e -> e.getUserName().trim().equalsIgnoreCase(DName.trim()));
                         break;
                     case 5: // Update
+                        System.out.println("\nPlease enter name to update its data:");
                         uName = dataReader.nextLine();
-                        System.out.println("\n enter details all the details");
-
-                        System.out.print("\nname:");
+                        System.out.println("Enter details all the details");
+                        System.out.print("Name:");
                         String uNameForUpdate = dataReader.nextLine();
-                        System.out.print("\nage:");
+                        System.out.print("Age:");
                         age = Integer.parseInt(dataReader.next("[0-9]{2}$"));
-                        System.out.print("\nGender(enter f or m):");
+                        System.out.print("Enter F for female and M for male:\n");
                         gender = dataReader.next("[f,F,m,M]");
                         currentClassObj.validateGender(gender, age, uName, users);
-                        users.stream().filter(e -> e.getUserName().toLowerCase().equals(uName.toLowerCase()))
+                        users.stream().filter(e -> e.getUserName().trim().toLowerCase().equals(uName.trim().toLowerCase()))
                                 .forEach(e -> currentClassObj.updateGender(gender, age, uNameForUpdate, e));
                         break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Process cancelled !!! Please enter data correctly to perform operation correctly.");
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Process cancelled. Please try again");
             }
-
         } while (option < 6 && option >= 1);
+        System.out.println("Thank you for choosing our service. Have a great day.");
     }
 
 }

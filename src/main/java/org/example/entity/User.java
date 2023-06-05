@@ -1,11 +1,10 @@
-package org.example.User.classes;
+package org.example.entity;
 
 public class User {
-    public int age;
-    public String userName, gender;
+    private int age;
+    private String userName, gender;
 
     public User(int age, String userName, String gender) {
-
         this.age = age;
         this.userName = userName;
         this.gender = gender;
