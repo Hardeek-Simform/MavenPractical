@@ -89,8 +89,6 @@ public class Main {
                         System.out.println("\nPlease enter the name whose data you want to delete:");
                         Scanner dataReader1 = new Scanner(System.in);
                         String DName = dataReader1.nextLine();
-//                        users.stream().filter(e -> DName.trim().toLowerCase().equals(e.getUserName().trim().toLowerCase()))
-//                                .forEach(e -> users.remove(e));
                         users.removeIf(e -> e.getUserName().trim().equalsIgnoreCase(DName.trim()));
                         break;
 
