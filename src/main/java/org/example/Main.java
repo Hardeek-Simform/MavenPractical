@@ -1,6 +1,5 @@
 package org.example;
 
-
 import org.example.entity.User;
 
 import java.util.ArrayList;
@@ -18,11 +17,10 @@ public class Main {
     }
 
     private void updateGender(String gender, int age, String uName, User object) {
-        if (gender == "F" || gender == "f") {
+        if (gender.equalsIgnoreCase("F")) {
             object.setAge(age);
             object.setGender("Female");
             object.setUserName(uName);
-
         } else {
             object.setAge(age);
             object.setGender("Male");
@@ -43,7 +41,6 @@ public class Main {
                     "4. Delete\n" +
                     "5. Update\n" +
                     "Enter your choice (To exit enter 6 or any other number):");
-
             try {
                 option = optionReader.nextInt();
             } catch (InputMismatchException e) {
@@ -74,8 +71,11 @@ public class Main {
                         System.out.println("\nHere below are the details that was requested:");
                         if (users.isEmpty()) {
                             System.out.println("No records found !!!\n");
-                        } else
-                            users.stream().forEach(System.out::println);
+                        } else {
+                            for (User user : users) {
+                                System.out.println(user);
+                            }
+                        }
                         break;
 
                     case 3: // Search
@@ -93,19 +93,20 @@ public class Main {
 //                                .forEach(e -> users.remove(e));
                         users.removeIf(e -> e.getUserName().trim().equalsIgnoreCase(DName.trim()));
                         break;
+
                     case 5: // Update
-                        System.out.println("\nPlease enter name to update its data:");
+                        System.out.println("Please enter name to update its data:");
                         uName = dataReader.nextLine();
-                        System.out.println("Enter details all the details");
+                        System.out.println("Enter all the details:");
                         System.out.print("Name:");
                         String uNameForUpdate = dataReader.nextLine();
                         System.out.print("Age:");
                         age = Integer.parseInt(dataReader.next("[0-9]{2}$"));
                         System.out.print("Enter F for female and M for male:\n");
                         gender = dataReader.next("[f,F,m,M]");
-                        currentClassObj.validateGender(gender, age, uName, users);
-                        users.stream().filter(e -> e.getUserName().trim().toLowerCase().equals(uName.trim().toLowerCase()))
-                                .forEach(e -> currentClassObj.updateGender(gender, age, uNameForUpdate, e));
+
+                        users.stream().filter(e -> e.getUserName().trim().toLowerCase().equals(uName.trim().toLowerCase())).findFirst()
+                                .ifPresent(user -> currentClassObj.updateGender(gender, age, uNameForUpdate, user));
                         break;
                 }
             } catch (InputMismatchException e) {
@@ -117,5 +118,4 @@ public class Main {
         } while (option < 6 && option >= 1);
         System.out.println("Thank you for choosing our service. Have a great day.");
     }
-
 }
