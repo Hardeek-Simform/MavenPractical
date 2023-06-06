@@ -108,6 +108,7 @@ public class Main {
                         users.stream().filter(e -> e.getUserName().trim().toLowerCase().equals(uName.trim().toLowerCase())).findFirst()
                                 .ifPresent(user -> currentClassObj.updateGender(gender, age, uNameForUpdate, user));
                         break;
+
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Process cancelled !!! Please enter data correctly to perform operation correctly.");
