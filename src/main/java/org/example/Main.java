@@ -35,12 +35,7 @@ public class Main {
         ArrayList<User> users = new ArrayList();
         Scanner optionReader = new Scanner(System.in);
         do {
-            System.out.print("\n1. Insert\n" +
-                    "2. Display\n" +
-                    "3. Search\n" +
-                    "4. Delete\n" +
-                    "5. Update\n" +
-                    "Enter your choice (To exit enter 6 or any other number):");
+            System.out.print("\n1. Insert\n" + "2. Display\n" + "3. Search\n" + "4. Delete\n" + "5. Update\n" + "Enter your choice (To exit enter 6 or any other number):");
             try {
                 option = optionReader.nextInt();
             } catch (InputMismatchException e) {
@@ -81,8 +76,7 @@ public class Main {
                     case 3: // Search
                         System.out.println("\nPlease enter the name to search:");
                         uName = dataReader.nextLine();
-                        users.stream().filter(e -> e.getUserName().toLowerCase().equals(uName.trim().toLowerCase()))
-                                .forEach(e -> System.out.println(e));
+                        users.stream().filter(e -> e.getUserName().toLowerCase().equals(uName.trim().toLowerCase())).forEach(e -> System.out.println(e));
                         break;
 
                     case 4: // Delete
@@ -103,8 +97,7 @@ public class Main {
                         System.out.print("Enter F for female and M for male:\n");
                         gender = dataReader.next("[f,F,m,M]");
 
-                        users.stream().filter(e -> e.getUserName().trim().toLowerCase().equals(uName.trim().toLowerCase())).findFirst()
-                                .ifPresent(user -> currentClassObj.updateGender(gender, age, uNameForUpdate, user));
+                        users.stream().filter(e -> e.getUserName().trim().toLowerCase().equals(uName.trim().toLowerCase())).findFirst().ifPresent(user -> currentClassObj.updateGender(gender, age, uNameForUpdate, user));
                         break;
 
                 }
